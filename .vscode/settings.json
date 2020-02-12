@@ -1,0 +1,5 @@
+{
+  "prettier.vueIndentScriptAndStyle": true,
+  "editor.formatOnSave": true,
+  "editor.fontFamily": "'JetBrains Mono','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'"
+}
