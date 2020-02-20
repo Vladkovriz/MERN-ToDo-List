@@ -1,19 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { List, Container } from "@material-ui/core";
+import { connect } from "react-redux";
 
 import { Todo } from "../ToDo/index";
 
 import { ITodo } from "../../interfaces";
-
+import {
+  GetTodos,
+  ComplatedTodo,
+  DeletedTodo
+} from "../../state/actions/actions";
 type TodosProps = {
   todos: ITodo[];
+  onGetTodo: () => void;
+  onAdd: (title: string) => void;
   onToggle: (id: string) => void;
   onRemove: (id: string) => void;
 };
 
-export const Todos: React.FC<TodosProps> = ({ todos, onToggle, onRemove }) => {
+const Todos: React.FC<TodosProps> = ({
+  todos,
+  onGetTodo,
+  onAdd,
+  onToggle,
+  onRemove
+}) => {
+  useEffect(() => {
+    onGetTodo();
+  }, []);
+
+  console.log(todos);
   if (todos.length === 0) {
     return (
       <Container maxWidth="sm">
@@ -21,7 +38,7 @@ export const Todos: React.FC<TodosProps> = ({ todos, onToggle, onRemove }) => {
       </Container>
     );
   }
-
+  console.log(todos);
   return (
     <Container maxWidth="sm">
       <List>
@@ -29,7 +46,6 @@ export const Todos: React.FC<TodosProps> = ({ todos, onToggle, onRemove }) => {
           .filter((item) => !item.completed)
           .map((todo: ITodo) => (
             <>
-              {console.log(todo.completed)}
               <Todo
                 completed={todo.completed}
                 key={todo._id}
@@ -44,7 +60,6 @@ export const Todos: React.FC<TodosProps> = ({ todos, onToggle, onRemove }) => {
           .filter((item) => item.completed)
           .map((todo: ITodo) => (
             <>
-              {console.log(todo.completed)}
               <Todo
                 completed={todo.completed}
                 key={todo._id}
@@ -59,3 +74,19 @@ export const Todos: React.FC<TodosProps> = ({ todos, onToggle, onRemove }) => {
     </Container>
   );
 };
+const mapStateToProps = (state: any) => {
+  console.log(state);
+  return {
+    todos: [...state.todos]
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onGetTodo: () => dispatch(GetTodos()),
+    onToggle: (id: string) => dispatch(ComplatedTodo(id)),
+    onRemove: (id: string) => dispatch(DeletedTodo(id))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);

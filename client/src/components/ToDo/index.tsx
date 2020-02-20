@@ -25,6 +25,7 @@ export const Todo: React.FC<ToDoProps> = ({
   onRemove
 }) => {
   const removeHandler = (id: string) => {
+    console.log("id", id);
     onRemove(id);
   };
   const toggleHandler = (id: string) => {

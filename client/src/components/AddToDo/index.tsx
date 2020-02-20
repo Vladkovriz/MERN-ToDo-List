@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { TextField, Button, Container } from "@material-ui/core";
 
+import { AddTodo } from "../../state/actions/actions";
+import { connect } from "react-redux";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {}
@@ -12,7 +15,8 @@ interface AddTodoProps {
   onAdd: (title: string) => void;
 }
 
-export const AddToDo: React.FC<AddTodoProps> = (props) => {
+const AddToDo: React.FC<AddTodoProps> = (props) => {
+  console.log(props);
   const [title, setTitle] = useState<string>("");
 
   const classes = useStyles();
@@ -49,3 +53,11 @@ export const AddToDo: React.FC<AddTodoProps> = (props) => {
     </Container>
   );
 };
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onAdd: (title: string) => dispatch(AddTodo(title))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AddToDo);
