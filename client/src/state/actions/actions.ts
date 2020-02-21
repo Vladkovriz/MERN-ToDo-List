@@ -1,4 +1,4 @@
-import { GET_TODO, ADD_TODO, COMPLATE_TODO, DELETE_TODO } from "./actionTypes";
+import { getTodo, addTodo, complateTodo, deleteTodo } from "./actionTypes";
 import { ITodo } from "../../interfaces";
 import axios from "axios";
 
@@ -9,19 +9,11 @@ export const GetTodos = () => {
   };
 };
 
-export const getTodo = (todos: ITodo[]) => {
-  return { type: GET_TODO, payload: todos };
-};
-
 export const AddTodo = (title: string) => {
   return async (dispatch: any) => {
     const res = await axios.post("/todos", { event: "ADD", title });
     dispatch(addTodo(res.data));
   };
-};
-
-export const addTodo = (res: ITodo) => {
-  return { type: ADD_TODO, payload: res };
 };
 
 export const ComplatedTodo = (id: string) => {
@@ -30,12 +22,8 @@ export const ComplatedTodo = (id: string) => {
       event: "COMPLATE",
       id: id
     });
-    dispatch(complateTodo(id, res));
+    dispatch(complateTodo(id, res.data));
   };
-};
-
-export const complateTodo = (id: string, res: any) => {
-  return { type: COMPLATE_TODO, payload: id, response: res };
 };
 
 export const DeletedTodo = (id: string) => {
@@ -43,8 +31,4 @@ export const DeletedTodo = (id: string) => {
     const res = await axios.delete(`/todos/${id}`);
     dispatch(deleteTodo(id));
   };
-};
-
-export const deleteTodo = (id: string) => {
-  return { type: DELETE_TODO, payload: id };
 };

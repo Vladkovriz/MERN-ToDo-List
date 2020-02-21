@@ -4,10 +4,10 @@ import {
   ADD_TODO,
   COMPLATE_TODO,
   DELETE_TODO
-} from "../actions/actionTypes";
-
+} from "../actions/todoActions";
+import { TodoActionType } from "../actions/actionTypes";
 import { ITodo } from "../../interfaces";
-interface State {
+export interface State {
   todos: ITodo[];
 }
 
@@ -17,28 +17,28 @@ const initialState: State = {
 
 export const rootReducer: Reducer<any> = (
   state: State = initialState,
-  action: any
+  action: TodoActionType
 ) => {
   switch (action.type) {
     case GET_TODO:
-      return { ...state, todos: action.payload };
+      return { ...state, todos: action.todos };
 
     case ADD_TODO:
       return {
         ...state,
-        todos: [action.payload, ...state.todos]
+        todos: [action.todo, ...state.todos]
       };
     case COMPLATE_TODO:
       return {
         ...state,
         todos: state.todos.map((todo: ITodo) =>
-          todo._id !== action.payload ? todo : action.response.data
+          todo._id !== action.id ? todo : action.todo
         )
       };
     case DELETE_TODO:
       return {
         ...state,
-        todos: state.todos.filter((todo: ITodo) => todo._id !== action.payload)
+        todos: state.todos.filter((todo: ITodo) => todo._id !== action.id)
       };
     default:
       return {

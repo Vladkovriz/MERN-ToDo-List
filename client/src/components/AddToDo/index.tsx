@@ -4,6 +4,7 @@ import { TextField, Button, Container } from "@material-ui/core";
 
 import { AddTodo } from "../../state/actions/actions";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,11 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface AddTodoProps {
+type AddTodoProps = {
   onAdd: (title: string) => void;
-}
+};
 
-const AddToDo: React.FC<AddTodoProps> = props => {
+const AddToDo: React.FC<AddTodoProps> = (props) => {
   const [title, setTitle] = useState<string>("");
 
   const classes = useStyles();

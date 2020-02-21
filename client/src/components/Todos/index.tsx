@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 
 import { List, Container } from "@material-ui/core";
 import { connect } from "react-redux";
-
+import { Dispatch } from "redux";
 import { Todo } from "../ToDo/index";
-
+import { TodoActionType } from "../../state/actions/actionTypes";
 import { ITodo } from "../../interfaces";
 import {
   GetTodos,
@@ -16,6 +16,10 @@ type TodosProps = {
   onGetTodo: () => void;
   onToggle: (id: string) => void;
   onRemove: (id: string) => void;
+};
+
+type DispatchToProps = {
+  todos: ITodo[];
 };
 
 const Todos: React.FC<TodosProps> = ({
@@ -39,7 +43,7 @@ const Todos: React.FC<TodosProps> = ({
     <Container maxWidth="sm">
       <List>
         {todos
-          .filter(item => !item.completed)
+          .filter((item) => !item.completed)
           .map((todo: ITodo) => (
             <>
               <Todo
@@ -53,7 +57,7 @@ const Todos: React.FC<TodosProps> = ({
             </>
           ))}
         {todos
-          .filter(item => item.completed)
+          .filter((item) => item.completed)
           .map((todo: ITodo) => (
             <>
               <Todo
@@ -70,7 +74,8 @@ const Todos: React.FC<TodosProps> = ({
     </Container>
   );
 };
-const mapStateToProps = (state: any) => {
+
+const mapStateToProps = (state: DispatchToProps) => {
   return {
     todos: [...state.todos]
   };
