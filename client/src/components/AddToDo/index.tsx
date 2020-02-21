@@ -15,8 +15,7 @@ interface AddTodoProps {
   onAdd: (title: string) => void;
 }
 
-const AddToDo: React.FC<AddTodoProps> = (props) => {
-  console.log(props);
+const AddToDo: React.FC<AddTodoProps> = props => {
   const [title, setTitle] = useState<string>("");
 
   const classes = useStyles();

@@ -24,7 +24,6 @@ export const rootReducer: Reducer<any> = (
       return { ...state, todos: action.payload };
 
     case ADD_TODO:
-      console.log(state, action);
       return {
         ...state,
         todos: [action.payload, ...state.todos]

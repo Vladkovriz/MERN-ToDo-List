@@ -14,7 +14,6 @@ import {
 type TodosProps = {
   todos: ITodo[];
   onGetTodo: () => void;
-  onAdd: (title: string) => void;
   onToggle: (id: string) => void;
   onRemove: (id: string) => void;
 };
@@ -22,7 +21,6 @@ type TodosProps = {
 const Todos: React.FC<TodosProps> = ({
   todos,
   onGetTodo,
-  onAdd,
   onToggle,
   onRemove
 }) => {
@@ -30,7 +28,6 @@ const Todos: React.FC<TodosProps> = ({
     onGetTodo();
   }, []);
 
-  console.log(todos);
   if (todos.length === 0) {
     return (
       <Container maxWidth="sm">
@@ -38,12 +35,11 @@ const Todos: React.FC<TodosProps> = ({
       </Container>
     );
   }
-  console.log(todos);
   return (
     <Container maxWidth="sm">
       <List>
         {todos
-          .filter((item) => !item.completed)
+          .filter(item => !item.completed)
           .map((todo: ITodo) => (
             <>
               <Todo
@@ -57,7 +53,7 @@ const Todos: React.FC<TodosProps> = ({
             </>
           ))}
         {todos
-          .filter((item) => item.completed)
+          .filter(item => item.completed)
           .map((todo: ITodo) => (
             <>
               <Todo
@@ -75,7 +71,6 @@ const Todos: React.FC<TodosProps> = ({
   );
 };
 const mapStateToProps = (state: any) => {
-  console.log(state);
   return {
     todos: [...state.todos]
   };

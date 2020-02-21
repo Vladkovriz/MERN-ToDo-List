@@ -11,11 +11,7 @@ import reduxThunk from "redux-thunk";
 import { rootReducer } from "./state/reducers/rootReducer";
 
 const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
-  console.log(store)
-  console.log(next)
-  console.log(action)
   const result = next(action);
-  console.log("Middleware", store.getState());
 };
 
 const store = createStore(

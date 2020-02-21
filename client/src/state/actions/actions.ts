@@ -5,7 +5,6 @@ import axios from "axios";
 export const GetTodos = () => {
   return async (dispatch: any) => {
     const res = await axios.get("/todos");
-    console.log(res);
     dispatch(getTodo(res.data));
   };
 };
@@ -15,10 +14,8 @@ export const getTodo = (todos: ITodo[]) => {
 };
 
 export const AddTodo = (title: string) => {
-  console.log("title", title);
   return async (dispatch: any) => {
     const res = await axios.post("/todos", { event: "ADD", title });
-    console.log(res);
     dispatch(addTodo(res.data));
   };
 };
@@ -44,8 +41,6 @@ export const complateTodo = (id: string, res: any) => {
 export const DeletedTodo = (id: string) => {
   return async (dispatch: any) => {
     const res = await axios.delete(`/todos/${id}`);
-    console.log("res", res);
-
     dispatch(deleteTodo(id));
   };
 };
