@@ -4,45 +4,47 @@ import { List, Container } from "@material-ui/core";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { Todo } from "../ToDo/index";
-import { TodoActionType } from "../../state/actions/actionTypes";
+import { TodoActionType } from "../../store/actions/actionTypes";
 import { ITodo } from "../../interfaces";
-import {
-  GetTodos,
-  ComplatedTodo,
-  DeletedTodo
-} from "../../state/actions/actions";
+// import {
+//   GetTodos,
+//   ComplatedTodo,
+//   DeletedTodo
+// } from "../../state/actions/actions";
 type TodosProps = {
-  todos: ITodo[];
-  onGetTodo: () => void;
-  onToggle: (id: string) => void;
-  onRemove: (id: string) => void;
+  // todos: ITodo[];
+  // onGetTodo: () => void;
+  // onToggle: (id: string) => void;
+  // onRemove: (id: string) => void;
 };
 
 type DispatchToProps = {
   todos: ITodo[];
 };
 
-const Todos: React.FC<TodosProps> = ({
-  todos,
-  onGetTodo,
-  onToggle,
-  onRemove
-}) => {
-  useEffect(() => {
-    onGetTodo();
-  }, []);
-
-  if (todos.length === 0) {
-    return (
-      <Container maxWidth="sm">
-        <p className="center">Пока дел нет!</p>
-      </Container>
-    );
+const Todos: React.FC<TodosProps> = (
+  {
+    // todos
+    // onGetTodo,
+    // onToggle,
+    // onRemove
   }
+) => {
+  // useEffect(() => {
+  //   onGetTodo();
+  // }, []);
+
+  // if (todos.length === 0) {
+  //   return (
+  //     <Container maxWidth="sm">
+  //       <p className="center">Пока дел нет!</p>
+  //     </Container>
+  //   );
+  // }
   return (
     <Container maxWidth="sm">
       <List>
-        {todos
+        {/* {todos
           .filter((item) => !item.completed)
           .map((todo: ITodo) => (
             <>
@@ -51,8 +53,8 @@ const Todos: React.FC<TodosProps> = ({
                 key={todo._id}
                 title={todo.title}
                 id={todo._id}
-                onToggle={onToggle}
-                onRemove={onRemove}
+                // onToggle={onToggle}
+                // onRemove={onRemove}
               ></Todo>
             </>
           ))}
@@ -65,28 +67,29 @@ const Todos: React.FC<TodosProps> = ({
                 key={todo._id}
                 title={todo.title}
                 id={todo._id}
-                onToggle={onToggle}
-                onRemove={onRemove}
+                // onToggle={onToggle}
+                // onRemove={onRemove}
               ></Todo>
             </>
-          ))}
+          ))} */}
       </List>
     </Container>
   );
 };
 
-const mapStateToProps = (state: DispatchToProps) => {
-  return {
-    todos: [...state.todos]
-  };
-};
+// const mapStateToProps = (state: any) => {
+//   return {
+//     todos: [...state.todos]
+//   };
+// };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    onGetTodo: () => dispatch(GetTodos()),
-    onToggle: (id: string) => dispatch(ComplatedTodo(id)),
-    onRemove: (id: string) => dispatch(DeletedTodo(id))
-  };
-};
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     onGetTodo: () => dispatch(GetTodos()),
+//     onToggle: (id: string) => dispatch(ComplatedTodo(id)),
+//     onRemove: (id: string) => dispatch(DeletedTodo(id))
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todos);
+// export default connect(mapStateToProps, mapDispatchToProps)(Todos);
+export default Todos;

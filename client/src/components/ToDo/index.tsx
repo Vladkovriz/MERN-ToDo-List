@@ -13,23 +13,23 @@ interface ToDoProps {
   title: string;
   id: string;
   completed: boolean;
-  onToggle: (id: string) => void;
-  onRemove: (id: string) => void;
+  // onToggle: (id: string) => void;
+  // onRemove: (id: string) => void;
 }
 
 export const Todo: React.FC<ToDoProps> = ({
   title,
   id,
-  completed,
-  onToggle,
-  onRemove
+  completed
+  // onToggle,
+  // onRemove
 }) => {
-  const removeHandler = (id: string) => {
-    onRemove(id);
-  };
-  const toggleHandler = (id: string) => {
-    onToggle(id);
-  };
+  // const removeHandler = (id: string) => {
+  //   onRemove(id);
+  // };
+  // const toggleHandler = (id: string) => {
+  //   onToggle(id);
+  // };
 
   return (
     <ListItem>
@@ -37,7 +37,7 @@ export const Todo: React.FC<ToDoProps> = ({
         edge="end"
         aria-label="delete"
         color="secondary"
-        onClick={(event) => removeHandler(id)}
+        // onClick={(event) => removeHandler(id)}
       >
         <DeleteIcon />
       </IconButton>
@@ -51,7 +51,7 @@ export const Todo: React.FC<ToDoProps> = ({
         value="secondary"
         color="primary"
         inputProps={{ "aria-label": "secondary checkbox" }}
-        onChange={(event) => toggleHandler(id)}
+        // onChange={(event) => toggleHandler(id)}
       />
     </ListItem>
   );
