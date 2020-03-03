@@ -31,21 +31,24 @@ app.get("/todos", (req, res) => {
 });
 
 app.post("/todos", async (req, res) => {
-  if (req.body.event === "ADD") {
-    const todo = new Todo({
-      title: req.body.title
-    });
+  console.log();
+  // if (req.body.event === "ADD") {
+  //   const todo = new Todo({
+  //     title: req.body.title
+  //   });
 
-    await todo.save();
-    res.json(todo);
-  } else if (req.body.event === "COMPLATE") {
-    const todo = await Todo.findById(req.body.id);
+  //   await todo.save();
+  //   res.json(todo);
+  // } else if (req.body.event === "COMPLATE") {
+  //   const todo = await Todo.findById(req.body.id);
 
-    todo.completed = !todo.completed;
+  //   todo.completed = !todo.completed;
 
-    const updatedTodo = await todo.save();
-    res.json(updatedTodo);
-  }
+  //   const updatedTodo = await todo.save();
+  //   res.json(updatedTodo);
+  // }
+  Todo.delete();
+  console.log(todos);
 });
 
 app.delete("/todos/:id", (req, res) => {
