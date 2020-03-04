@@ -1,20 +1,51 @@
-// import { getTodo, addTodo, complateTodo, deleteTodo } from "./actionTypes";
-import { GET_TODO, PUT_TODO } from "./todoActions";
+import {
+  GET_TODO,
+  WATCH_GET_TODO,
+  ADD_TODO,
+  WATCH_ADD_TODO,
+  COMPLATE_TODO,
+  WATCH_COMPLATE_TODO,
+  DELETE_TODO,
+  WATCH_DELETE_TODO
+} from "./todoActions";
 import { ITodo } from "../../interfaces";
-import axios from "axios";
-// export const GetTodos = () => {
-//   // return async (dispatch: any) => {
-//   //   const res = await axios.get("/todos");
-//   //   dispatch(getTodo(res.data));
-//   // };
-// };
 
-// export const AddTodo = (title: string) => {
-//   // return async (dispatch: any) => {
-//   //   const res = await axios.post("/todos", { event: "ADD", title });
-//   //   dispatch(addTodo(res.data));
-//   // };
-// };
+// GET_TODO
+export const getTodo = (todos: ITodo[]): any => {
+  return {
+    type: GET_TODO,
+    payload: todos
+  };
+};
+
+export const asyncGetTodo = () => {
+  return {
+    type: WATCH_GET_TODO
+  };
+};
+
+// ADD_TODO
+export const addTodo = (todo: ITodo): any => {
+  return { type: ADD_TODO, payload: todo };
+};
+export const asyncAddTodo = (title: string): any => {
+  return { type: WATCH_ADD_TODO, payload: { title } };
+};
+
+//COMPLATE_TODO
+export const complateTodo = (id: string): any => {
+  return {
+    type: COMPLATE_TODO,
+    payload: id
+  };
+};
+
+export const asyncComplateTodo = (id: string | undefined) => {
+  return {
+    type: WATCH_COMPLATE_TODO,
+    payload: id
+  };
+};
 
 // export const ComplatedTodo = (id: string) => {
 //   // return async (dispatch: any) => {
@@ -34,14 +65,6 @@ import axios from "axios";
 //   // };
 // };
 
-// export const getTodo = (todos: ITodo[]): TodoActionType => {
-//   return { type: GET_TODO, payload: { todos } };
-// };
-
-// export const addTodo = (todo: ITodo): TodoActionType => {
-//   return { type: ADD_TODO, payload: { todo } };
-// };
-
 // export const complateTodo = (todo: ITodo, id: string): TodoActionType => {
 //   console.log(id);
 //   return {
@@ -56,16 +79,4 @@ import axios from "axios";
 // export const deleteTodo = (id: string): TodoActionType => {
 //   return { type: DELETE_TODO, payload: { id } };
 // };
-
-export const putTodo = (todos: any): any => {
-  return {
-    type: PUT_TODO,
-    payload: todos
-  };
-};
-
-export const loadTodo = () => {
-  return {
-    type: GET_TODO
-  };
-};
+// COMPLATE

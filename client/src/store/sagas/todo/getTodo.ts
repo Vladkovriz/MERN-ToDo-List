@@ -1,6 +1,6 @@
 import { takeEvery, put, call } from "redux-saga/effects";
-import { putTodo } from "../../actions/actions";
-import { GET_TODO } from "../../actions/todoActions";
+import { getTodo } from "../../actions/actions";
+import { WATCH_GET_TODO } from "../../actions/todoActions";
 
 import axios from "axios";
 
@@ -10,9 +10,9 @@ function fetchTodo() {
 
 function* workerLoadTodo() {
   const todos = yield call(fetchTodo);
-  yield put(putTodo(todos.data));
+  yield put(getTodo(todos.data));
 }
 
 export function* watchLoadTodo() {
-  yield takeEvery(GET_TODO, workerLoadTodo);
+  yield takeEvery(WATCH_GET_TODO, workerLoadTodo);
 }

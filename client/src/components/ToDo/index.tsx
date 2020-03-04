@@ -9,27 +9,25 @@ import {
 
 import DeleteIcon from "@material-ui/icons/Delete";
 
-interface ToDoProps {
-  title: string;
-  id: string;
-  completed: boolean;
-  // onToggle: (id: string) => void;
-  // onRemove: (id: string) => void;
-}
+import { ITodo } from "../../interfaces";
 
-export const Todo: React.FC<ToDoProps> = ({
-  title,
-  id,
-  completed
-  // onToggle,
-  // onRemove
-}) => {
+import { asyncComplateTodo } from "../../store/actions/actions";
+import { useDispatch } from "react-redux";
+type ToDoProps = {
+  todo: ITodo;
+};
+
+export const Todo: React.FC<ToDoProps> = (props) => {
+  const { todo } = props;
+  const dispatch = useDispatch();
+  
   // const removeHandler = (id: string) => {
-  //   onRemove(id);
+  //   asyncComplateTodo(id);
   // };
-  // const toggleHandler = (id: string) => {
-  //   onToggle(id);
-  // };
+
+  const toggleHandler = (id: string | undefined): void => {
+    dispatch(asyncComplateTodo(id));
+  };
 
   return (
     <ListItem>
@@ -43,15 +41,15 @@ export const Todo: React.FC<ToDoProps> = ({
       </IconButton>
 
       <ListItemText
-        primary={title}
-        style={completed ? { textDecoration: "line-through" } : {}}
+        primary={todo.title}
+        style={todo.completed ? { textDecoration: "line-through" } : {}}
       />
       <Checkbox
-        checked={completed}
+        checked={todo.completed}
         value="secondary"
         color="primary"
         inputProps={{ "aria-label": "secondary checkbox" }}
-        // onChange={(event) => toggleHandler(id)}
+        onChange={() => toggleHandler(todo._id)}
       />
     </ListItem>
   );

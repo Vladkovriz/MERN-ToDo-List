@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { TextField, Button, Container } from "@material-ui/core";
 
-// import { AddTodo } from "../../state/actions/actions";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
+import { asyncAddTodo } from "../../store/actions/actions";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,21 +18,23 @@ type AddTodoProps = {
 const AddToDo: React.FC<AddTodoProps> = (props) => {
   const [title, setTitle] = useState<string>("");
 
+  const dispatch = useDispatch();
+
   const classes = useStyles();
 
-  // const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setTitle(event.target.value);
-  // };
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
 
-  // const keyPressHandler = (event: React.KeyboardEvent) => {
-  //   if (event.key === "Enter") {
-  //     props.onAdd(title);
-  //   }
-  // };
+  const keyPressHandler = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      dispatch(asyncAddTodo(title));
+    }
+  };
 
-  // const handleAddTodo = (event: React.MouseEvent) => {
-  //   props.onAdd(title);
-  // };
+  const handleAddTodo = (event: React.MouseEvent) => {
+    dispatch(asyncAddTodo(title));
+  };
 
   return (
     <Container maxWidth="sm">
@@ -44,25 +45,14 @@ const AddToDo: React.FC<AddTodoProps> = (props) => {
         fullWidth
         margin="normal"
         variant="outlined"
-        // onChange={changeHandler}
-        // onKeyPress={keyPressHandler}
+        onChange={changeHandler}
+        onKeyPress={keyPressHandler}
       />
-      <Button
-        variant="contained"
-        color="primary"
-        // onClick={handleAddTodo}
-      >
+      <Button variant="contained" color="primary" onClick={handleAddTodo}>
         Primary
       </Button>
     </Container>
   );
 };
 
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     onAdd: (title: string) => dispatch(AddTodo(title))
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(AddToDo);
 export default AddToDo;

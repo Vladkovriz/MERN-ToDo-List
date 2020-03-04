@@ -13,14 +13,13 @@ import createSagaMiddleware from "redux-saga";
 import App from "./App";
 
 import { rootReducer } from "./store/reducers/rootReducer";
-import { watchLoadTodo } from "./store/sagas/todo/getTodo";
+import rootSaga from "./store/sagas/index";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, applyMiddleware(logger, sagaMiddleware));
 
-sagaMiddleware.run(watchLoadTodo);
-
+sagaMiddleware.run(rootSaga);
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(

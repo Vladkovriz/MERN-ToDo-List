@@ -1,6 +1,6 @@
-export interface ITodo {
+export type ITodo = {
   title: string;
-  _id?: string;
-  completed?: boolean;
-  __v?: number;
-}
+  _id?: string | undefined;
+  completed?: boolean | undefined;
+  __v?: number | undefined;
+};
